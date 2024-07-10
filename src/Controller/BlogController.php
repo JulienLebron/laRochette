@@ -27,6 +27,7 @@ class BlogController extends AbstractController
         // pour récupérer le repository, je le passe en paramètre de la méthode home()
         // cela s'appel une injection de dépendance
         $articles = $repo->findAll();
+        dump($articles);
         // J'utilise la méthode findAll() pour récupérer tous les articles en BDD
 
         // render() permet de créer une vue en sélectionnant un template et en lui passant de la données
