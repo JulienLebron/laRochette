@@ -2,7 +2,13 @@
 
 {% block body %}
 
-	<h1>Création d'un article</h1>
+	<h1>
+		{% if editMode %}
+			Modification d'un Article
+		{% else %}
+			Création d'un nouvel Article
+		{% endif %}
+	</h1>
 
 	{{ form_start(formArticle) }}
 	{{ form_row(formArticle.title, {

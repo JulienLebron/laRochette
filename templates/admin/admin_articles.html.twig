@@ -12,7 +12,7 @@
 			</div>
 		{% endfor %}
 
-		<a href="" class="btn btn-primary">Créer un Article</a>
+		<a href="{{ path('admin_new_article') }}" class="btn btn-primary">Créer un Article</a>
 	</div>
 
 	<table class="table table-bordered table-striped table-hover text-center">
@@ -23,9 +23,7 @@
 						<th>{{ colonne }}</th>
 					{% endif %}
 				{% endfor %}
-				<th>Voir</th>
-				<th>Modifier</th>
-				<th>Supprimer</th>
+				<th>⚙️</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -36,18 +34,14 @@
 					<td><img src="{{ asset('images/articles/' ~ article.image) }}" alt="image de l'article" class="img-article-admin"></td>
 					<td>{{ article.createdAt | date('d/m/Y à H:i:s' ) }}</td>
 					<td>{{ article.updatedAt | date('d/m/Y à H:i:s' ) }}</td>
-					<td>
+					<td class="td-admin">
 						<a href="{{ path('blog_show', {"id": article.id }) }}" class="btn btn-info">
 							<i class="fa-solid fa-eye"></i>
 						</a>
-					</td>
-					<td>
-						<a href="" class="btn btn-warning">
+						<a href="{{ path('admin_edit_article', {"id": article.id }) }}" class="btn btn-warning">
 							<i class="fa-solid fa-pen-to-square"></i>
 						</a>
-					</td>
-					<td>
-						<a href="" class="btn btn-danger">
+						<a href="{{ path('admin_delete_article', {"id": article.id }) }}" class="btn btn-danger">
 							<i class="fa-solid fa-trash-can"></i>
 						</a>
 					</td>
@@ -55,6 +49,4 @@
 			{% endfor %}
 		</tbody>
 	</table>
-
-
 {% endblock %}
