@@ -5,6 +5,25 @@
     font-family: "Roboto";
 }
 
+.logo {
+    height: 45px;
+    margin-left: 10px;
+}
+
+.container {
+    background: white;
+}
+
+.container-homme-banner {
+    height: 250px;
+    background: linear-gradient(180deg,rgba(255,0,0,0) 50%, #000000 100%), url("../images/banner/banner-pokemon-2.jpg") no-repeat center/cover;
+}
+
+.container-title-home strong,
+.container-title-home h1 {
+    font-size: 12px;
+}
+
 .card-link {
     text-decoration: none;
     color: white;
@@ -36,6 +55,13 @@ td {
     vertical-align: middle;
 }
 
-i {
+i.white {
+    color: white;
+}
+
+
+.copyright {
+    margin: 0;
+    padding: 20px 0;
     color: white;
 }
