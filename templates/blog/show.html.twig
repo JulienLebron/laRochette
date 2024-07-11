@@ -2,30 +2,31 @@
 
 {% block body %}
 
-    <div class="container text-center mt-5">
-        <h1>{{ article.title }} {{ article.id }}</h1>
-        <div class="card mt-5" style="width: 50rem; margin: 0 auto;">
-            <img src="{{ article.image }}" alt="image de l'article">
-            <div class="card-body mt-5">
-                <p>{{ article.content | raw }}</p>
-            </div>
-            <div class="card-footer">
-                <table class="table table-bordered">
-                    <tbody>
-                        <tr style="background: #8900E5; color: white;">
-                            <th>Date de publication</th>
-                            <th>Catégorie</th>
-                        </tr>
-                        <tr>
-                            <td>{{ article.createdAt | date('d/m/y') }}</td>
-                            <td class="badge rounded-pill text-bg-primary">News</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <a href="{{ path('blog_edit', {'id': article.id }) }}" class="btn btn-primary">Modifier l'article</a>
-        </div>
-    </div>
+	<div class="container text-center mt-5">
+		<h1>{{ article.title }}
+			{{ article.id }}</h1>
+		<div class="card mt-5" style="width: 50rem; margin: 0 auto;">
+			<img src="{{ asset('images/articles/' ~ article.image) }}" alt="image de l'article">
+			<div class="card-body mt-5">
+				<p>{{ article.content | raw }}</p>
+			</div>
+			<div class="card-footer">
+				<table class="table table-bordered">
+					<tbody>
+						<tr style="background: #8900E5; color: white;">
+							<th>Date de publication</th>
+							<th>Catégorie</th>
+						</tr>
+						<tr>
+							<td>{{ article.createdAt | date('d/m/y') }}</td>
+							<td class="badge rounded-pill text-bg-primary">News</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<a href="{{ path('blog_edit', {'id': article.id }) }}" class="btn btn-primary">Modifier l'article</a>
+		</div>
+	</div>
 
 
 {% endblock %}

@@ -5,7 +5,6 @@
     font-family: "Roboto";
 }
 
-
 .card-link {
     text-decoration: none;
     color: white;
@@ -25,4 +24,18 @@ span.badge {
 .card-body h5 {
     font-size: 15px;
     font-weight: 700;
+}
+
+.img-article-admin {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+}
+
+td {
+    vertical-align: middle;
+}
+
+i {
+    color: white;
 }

@@ -2,24 +2,24 @@
 
 {% block body %}
 
-<h1>Création d'un article</h1>
+	<h1>Création d'un article</h1>
 
-{{ form_start(formArticle) }}
-    {{ form_row(formArticle.title, {
+	{{ form_start(formArticle) }}
+	{{ form_row(formArticle.title, {
         label : "Titre de l'article",
         attr: {
             placeholder: "Entrer un titre pour le nouvel article"
         }
     }) }}
-    {{ form_row(formArticle.content, {
+	{{ form_row(formArticle.content, {
         attr: {
             placeholder: "Contenu de l'article"
         }
     }) }}
-    {{ form_row(formArticle.image, {
+	{{ form_row(formArticle.imageFile, {
         label: "Ajouter une image pour l'article"
     }) }}
-    <button type="submit" class="btn btn-primary mt-2">Valider</button>
-{{ form_end(formArticle) }}
+	<button type="submit" class="btn btn-primary mt-2">Valider</button>
+	{{ form_end(formArticle) }}
 
 {% endblock %}
