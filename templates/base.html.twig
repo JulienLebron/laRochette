@@ -39,7 +39,7 @@
 						</li>
 						{% if is_granted('ROLE_ADMIN') %}
 							<li class="nav-item">
-								<a href="nav-link">
+								<a class="nav-link" href="{{ path('admin') }}">
 									<i class="fa-solid fa-gears"></i>
 									Administration</a>
 							</li>
@@ -61,7 +61,7 @@
 				</div>
 			</div>
 		</nav>
-		<div class="container-fluid container-homme-banner"></div>
+		{# <div class="container-fluid container-homme-banner"></div> #}
 		<div class="container" style="min-height: 90vh;"> {% block body %}{% endblock %}
 			</div>
 			<footer class="container-fluid bg-dark text-center">

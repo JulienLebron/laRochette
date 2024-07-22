@@ -18,7 +18,7 @@
 		{% for article in articles %}
 			<div class="card mb-5" style="width: 275px; height: 400px; background: no-repeat center/cover url('{{ asset('images/articles/' ~ article.image) }}')">
 				<a class="card-link" href="{{ path('blog_show', {'id': article.id }) }}">
-					<span class="badge rounded-pill text-bg-primary">NEWS JEU</span>
+					<span class="badge rounded-pill text-bg-primary">{{ article.category }}</span>
 					<div class="card-body">
 						<h5 class="card-title">{{ article.title |slice(0,80) }}...</h5>
 						<small>Ecrit le

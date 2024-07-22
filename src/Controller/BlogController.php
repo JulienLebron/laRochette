@@ -3,13 +3,17 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Comment;
 use App\Form\ArticleType;
+use App\Form\CommentType;
 use App\Repository\ArticleRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 class BlogController extends AbstractController
 {
@@ -38,19 +42,43 @@ class BlogController extends AbstractController
     }
 
     #[Route('/blog/show/{id}', name: 'blog_show')]
-    public function show(Article $article): Response
+    public function show(Article $article, Request $request, EntityManagerInterface $manager, Security $security): Response
     {
+
+        $comment = new Comment;
+        $user = $security->getUser();
+        if ($user) {
+            $comment->setAuthor($user->getFirstname());
+        }
+        $comment->setArticle($article);
+        $comment->setCreatedAt(new \DateTime());
+
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($comment);
+            $manager->flush();
+            return $this->redirectToRoute('blog_show', [
+                'id' => $article->getId()
+            ]);
+        }
+
         return $this->render('blog/show.html.twig', [
+            'formComment' => $form->createView(),
             'article' => $article
         ]);
     }
+
+
+
+
 
     #[Route('/blog/new', name: 'blog_create')]
     #[Route('/blog/edit/{id}', name: 'blog_edit')]
     public function form(Request $request, EntityManagerInterface $manager, Article $article = null): Response
     {
         // si nous ne récupérons pas d'objet Article, nous en créons un vide et prêt à être rempli
-        if(!$article) {
+        if (!$article) {
             $article = new Article;
             $article->setCreatedAt(new \DateTime());
         }
@@ -62,7 +90,7 @@ class BlogController extends AbstractController
         // handleRequest() permet d'insérer les données du formulaire dans l'objet $article
         // elle permet aussi de faire des vérifications sur le formulaire (quelle méthode ? est-ce que les champs sont remplis ? etc)
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $article->setCreatedAt(new \DateTime()); // ajout de la date seulement à l'insertion d'un article
             $manager->persist($article); // prépare à linsertion de l'article en BDD
             $manager->flush(); // exécute la requête d'insertion
@@ -77,6 +105,4 @@ class BlogController extends AbstractController
             // createView() renvoie un objet représentant l'affichage du formulaire
         ]);
     }
-
-
 }
